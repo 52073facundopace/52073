@@ -1,0 +1,20 @@
+ Analizador de Expresiones Regulares (ANTLR + JavaScript)
+
+Aqui se realiza un analizador de expresiones regulares basado en una gramática EBNF, usando ANTLR4 y Node.js.
+
+Lo que tiene:
+
+- `Regex.g4`: gramática ANTLR del lenguaje de expresiones regulares.
+- `index.js`: archivo principal que realiza el análisis y ejecución.
+- `CustomRegexVisitor.js`: visitor personalizado que recorre y muestra elementos de la expresión.
+- `input.txt`: archivo de prueba para entrada principal.
+- `gramatica.txt`: copia de la gramática dada en la consigna.
+- `ejemplos/`: contiene 2 ejemplos válidos y 2 con errores.
+- `generated/`: archivos generados por ANTLR (Lexer, Parser, Visitor).
+
+Cómo ejecutar
+
+1. Tener Java y Node.js instalados.
+2. Instalar dependencias:
+   ```bash
+   npm install

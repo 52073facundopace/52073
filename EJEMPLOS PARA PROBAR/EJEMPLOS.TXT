@@ -1,0 +1,11 @@
+EJEMPLO CORRECTO 1
+a+b?(cd|ef)*
+
+EJEMPLO CORRECTO 2
+a+b?(cd|ef)*
+
+EJEMPLO INCORRECTO 1
+a**b
+
+ejemplo2-incorrecto 2
+[a-z
