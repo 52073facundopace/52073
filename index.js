@@ -6,6 +6,7 @@ import RegexParser from './generated/RegexParser.js';
 import CustomVisitor from './CustomRegexVisitor.js';
 
 import fs from 'fs';
+import readline from 'readline';
 
 async function main() {
   let input = '';
@@ -26,12 +27,18 @@ async function main() {
   // Obtener y mostrar todos los tokens reconocidos (Tabla de lexemas-tokens)
   tokenStream.fill();
   console.log("📌 Tabla de lexemas-tokens:");
-  tokenStream.tokens.forEach(token => {
-    const tokenName = lexer.symbolicNames[token.type];
-    if (tokenName !== "WS") {
-      console.log(`→ Token: '${token.text}'\tTipo: ${tokenName}`);
-    }
-  });
+  const symbolicNames = RegexLexer.symbolicNames || [];
+const literalNames = RegexLexer.literalNames || [];
+
+tokenStream.tokens.forEach(token => {
+  const tokenName =
+    symbolicNames[token.type] ||
+    literalNames[token.type] ||
+    token.type;
+  if (tokenName !== "WS" && token.text !== null) {
+    console.log(→ Token: '${token.text}'\tTipo: ${tokenName});
+  }
+});
 
   // === ANÁLISIS SINTÁCTICO ===
   const parser = new RegexParser(tokenStream);
@@ -41,11 +48,11 @@ async function main() {
   parser.removeErrorListeners();
   parser.addErrorListener({
     syntaxError(recognizer, offendingSymbol, line, column, msg) {
-      console.error(`❌ Error de sintaxis en línea ${line}, columna ${column}: ${msg}`);
+      console.error(❌ Error de sintaxis en línea ${line}, columna ${column}: ${msg});
     }
   });
 
-  const tree = parser.Regex();
+  const tree = parser.regex();
 
   // Validación sintáctica
   if (parser._syntaxErrors > 0) {
@@ -61,9 +68,29 @@ async function main() {
   console.log(parseTreeStr);
 
   // === INTERPRETACIÓN ===
-  const visitor = new CustomRegexVisitor();
+  const visitor = new CustomVisitor();
   console.log("\n🔧 Resultado del intérprete:");
   visitor.visit(tree);
+
+  // === TRADUCCIÓN A JAVASCRIPT Y EJECUCIÓN ===
+  const regexJS = visitor.toJSRegex(tree);
+  console.log(\n📝 Expresión regular traducida a JavaScript: /${regexJS}/);
+
+  // Prueba la expresión regular con un string de ejemplo usando readline
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question('🔍 Ingresa un string para probar el match: ', (testString) => {
+    const regexObj = new RegExp(regexJS);
+    if (regexObj.test(testString)) {
+      console.log('✅ ¡Hay match!');
+    } else {
+      console.log('❌ No hay match.');
+    }
+    rl.close();
+  });
 }
 
 main();
