@@ -34,7 +34,7 @@ async function main() {
   });
 
   // === ANÁLISIS SINTÁCTICO ===
-  const parser = new Regex(tokenStream);
+  const parser = new RegexParser(tokenStream);
   parser.buildParseTrees = true;
 
   // Capturar errores
