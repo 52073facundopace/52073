@@ -1,62 +1,37 @@
-import ECMAScriptSubsetVisitor from './generated/RegexVisitor.js';
+import RegexVisitor from './RegexVisitor.js';
 
 class CustomVisitor extends RegexVisitor {
-  constructor() {
-    super();
-    this.variables = new Map();
-  }
-
-  visitProgram(ctx) {
-    return ctx.statement().map(s => this.visit(s));
-  }
-
-  visitAssignmentStatement(ctx) {
-    const id = ctx.Identifier().getText();
-    const value = this.visit(ctx.expression());
-    this.variables.set(id, value);
-    return null;
-  }
-
-  visitConsoleStatement(ctx) {
-    const value = this.visit(ctx.expression());
-    console.log(`console.log -> ${value}`);
-    return null;
-  }
-
-  visitWhileStatement(ctx) {
-    while (this.visit(ctx.expression())) {
-      this.visit(ctx.block());
+  visitRegex(ctx) {
+    // Si hay alternancia, visitamos ambos lados
+    if (ctx.term() && ctx.regex()) {
+      this.visit(ctx.term());
+      this.visit(ctx.regex());
+    } else {
+      this.visit(ctx.term(0));
     }
+    return true;
   }
 
-  visitBlock(ctx) {
-    return ctx.statement().map(s => this.visit(s));
+  visitTerm(ctx) {
+    // Concatenación: todos los factors
+    return ctx.factor().every(f => this.visit(f));
   }
 
-  visitAddSubExpr(ctx) {
-    const left = this.visit(ctx.expression(0));
-    const right = this.visit(ctx.expression(1));
-    return ctx.op.text === '+' ? left + right : left - right;
+  visitFactor(ctx) {
+    this.visit(ctx.base());
+    // El quantifier es opcional
+    if (ctx.quantifier) this.visit(ctx.quantifier());
+    return true;
   }
 
-  visitMulDivExpr(ctx) {
-    const left = this.visit(ctx.expression(0));
-    const right = this.visit(ctx.expression(1));
-    return ctx.op.text === '*' ? left * right : left / right;
-  }
+  visitCharBase(ctx) { return true; }
+  visitGroupBase(ctx) { return this.visit(ctx.group()); }
+  visitClassBase(ctx) { return this.visit(ctx.characterClass()); }
 
-  visitParensExpr(ctx) {
-    return this.visit(ctx.expression());
-  }
-
-  visitIdExpr(ctx) {
-    const name = ctx.Identifier().getText();
-    return this.variables.get(name) ?? 0;
-  }
-
-  visitNumExpr(ctx) {
-    return parseInt(ctx.Number().getText(), 10);
-  }
+  visitGroup(ctx) { return this.visit(ctx.regex()); }
+  visitCharacterClass(ctx) { return ctx.range().every(r => this.visit(r)); }
+  visitRange(ctx) { return true; }
+  visitQuantifier(ctx) { return true; }
 }
 
 export default CustomVisitor;
