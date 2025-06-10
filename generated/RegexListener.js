@@ -1,4 +1,4 @@
-// Generated from c:/Users/Ulises/regex-analyzer/Regex.g4 by ANTLR 4.13.2
+// Generated from Regex.g4 by ANTLR 4.13.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
 

@@ -21,12 +21,15 @@ characterClass
     : '[' '^'? range+ ']' ;
 
 range
-    : CHAR '-' CHAR ;
+    : CHAR '-' CHAR
+    | CHAR
+    ;
 
 quantifier
-    : '*' | '+' | '?' | '{' NUMBER (',' NUMBER?)? '}' ;
+    : '*' | '+' | '?' | '{' NUMBER (',' NUMBER?)? '}'
+    ;
 
 // Tokens
-CHAR : ~'|' '(' ')' '*' '+' '?' '{' '}' '[' ']' '\n' '\r';
-NUMBER  : [0-9]+ ;
-WS      : [ \t\r\n]+ -> skip ;
+CHAR   : ~[0-9|()*+?{}[\]\r\n];
+NUMBER : [0-9]+ ;
+WS     : [ \t\r\n]+ -> skip ;

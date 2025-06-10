@@ -1,29 +1,30 @@
-// Generated from c:/Users/Ulises/regex-analyzer/Regex.g4 by ANTLR 4.13.2
+// Generated from Regex.g4 by ANTLR 4.13.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import RegexListener from './RegexListener.js';
 import RegexVisitor from './RegexVisitor.js';
 
-const serializedATN = [4,1,16,69,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,16,71,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 2,5,7,5,2,6,7,6,2,7,7,7,1,0,1,0,1,0,3,0,20,8,0,1,1,4,1,23,8,1,11,1,12,1,
 24,1,2,1,2,3,2,29,8,2,1,3,1,3,1,3,3,3,34,8,3,1,4,1,4,1,4,1,4,1,5,1,5,3,5,
-42,8,5,1,5,4,5,45,8,5,11,5,12,5,46,1,5,1,5,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,
-7,1,7,1,7,1,7,3,7,62,8,7,3,7,64,8,7,1,7,3,7,67,8,7,1,7,0,0,8,0,2,4,6,8,10,
-12,14,0,0,72,0,16,1,0,0,0,2,22,1,0,0,0,4,26,1,0,0,0,6,33,1,0,0,0,8,35,1,
-0,0,0,10,39,1,0,0,0,12,50,1,0,0,0,14,66,1,0,0,0,16,19,3,2,1,0,17,18,5,1,
-0,0,18,20,3,0,0,0,19,17,1,0,0,0,19,20,1,0,0,0,20,1,1,0,0,0,21,23,3,4,2,0,
-22,21,1,0,0,0,23,24,1,0,0,0,24,22,1,0,0,0,24,25,1,0,0,0,25,3,1,0,0,0,26,
-28,3,6,3,0,27,29,3,14,7,0,28,27,1,0,0,0,28,29,1,0,0,0,29,5,1,0,0,0,30,34,
-5,14,0,0,31,34,3,8,4,0,32,34,3,10,5,0,33,30,1,0,0,0,33,31,1,0,0,0,33,32,
-1,0,0,0,34,7,1,0,0,0,35,36,5,2,0,0,36,37,3,0,0,0,37,38,5,3,0,0,38,9,1,0,
-0,0,39,41,5,4,0,0,40,42,5,5,0,0,41,40,1,0,0,0,41,42,1,0,0,0,42,44,1,0,0,
-0,43,45,3,12,6,0,44,43,1,0,0,0,45,46,1,0,0,0,46,44,1,0,0,0,46,47,1,0,0,0,
-47,48,1,0,0,0,48,49,5,6,0,0,49,11,1,0,0,0,50,51,5,14,0,0,51,52,5,7,0,0,52,
-53,5,14,0,0,53,13,1,0,0,0,54,67,5,8,0,0,55,67,5,9,0,0,56,67,5,10,0,0,57,
-58,5,11,0,0,58,63,5,15,0,0,59,61,5,12,0,0,60,62,5,15,0,0,61,60,1,0,0,0,61,
-62,1,0,0,0,62,64,1,0,0,0,63,59,1,0,0,0,63,64,1,0,0,0,64,65,1,0,0,0,65,67,
-5,13,0,0,66,54,1,0,0,0,66,55,1,0,0,0,66,56,1,0,0,0,66,57,1,0,0,0,67,15,1,
-0,0,0,9,19,24,28,33,41,46,61,63,66];
+42,8,5,1,5,4,5,45,8,5,11,5,12,5,46,1,5,1,5,1,6,1,6,1,6,1,6,3,6,55,8,6,1,
+7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,64,8,7,3,7,66,8,7,1,7,3,7,69,8,7,1,7,0,0,8,
+0,2,4,6,8,10,12,14,0,0,75,0,16,1,0,0,0,2,22,1,0,0,0,4,26,1,0,0,0,6,33,1,
+0,0,0,8,35,1,0,0,0,10,39,1,0,0,0,12,54,1,0,0,0,14,68,1,0,0,0,16,19,3,2,1,
+0,17,18,5,1,0,0,18,20,3,0,0,0,19,17,1,0,0,0,19,20,1,0,0,0,20,1,1,0,0,0,21,
+23,3,4,2,0,22,21,1,0,0,0,23,24,1,0,0,0,24,22,1,0,0,0,24,25,1,0,0,0,25,3,
+1,0,0,0,26,28,3,6,3,0,27,29,3,14,7,0,28,27,1,0,0,0,28,29,1,0,0,0,29,5,1,
+0,0,0,30,34,5,14,0,0,31,34,3,8,4,0,32,34,3,10,5,0,33,30,1,0,0,0,33,31,1,
+0,0,0,33,32,1,0,0,0,34,7,1,0,0,0,35,36,5,2,0,0,36,37,3,0,0,0,37,38,5,3,0,
+0,38,9,1,0,0,0,39,41,5,4,0,0,40,42,5,5,0,0,41,40,1,0,0,0,41,42,1,0,0,0,42,
+44,1,0,0,0,43,45,3,12,6,0,44,43,1,0,0,0,45,46,1,0,0,0,46,44,1,0,0,0,46,47,
+1,0,0,0,47,48,1,0,0,0,48,49,5,6,0,0,49,11,1,0,0,0,50,51,5,14,0,0,51,52,5,
+7,0,0,52,55,5,14,0,0,53,55,5,14,0,0,54,50,1,0,0,0,54,53,1,0,0,0,55,13,1,
+0,0,0,56,69,5,8,0,0,57,69,5,9,0,0,58,69,5,10,0,0,59,60,5,11,0,0,60,65,5,
+15,0,0,61,63,5,12,0,0,62,64,5,15,0,0,63,62,1,0,0,0,63,64,1,0,0,0,64,66,1,
+0,0,0,65,61,1,0,0,0,65,66,1,0,0,0,66,67,1,0,0,0,67,69,5,13,0,0,68,56,1,0,
+0,0,68,57,1,0,0,0,68,58,1,0,0,0,68,59,1,0,0,0,69,15,1,0,0,0,10,19,24,28,
+33,41,46,54,63,65,68];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -270,13 +271,27 @@ export default class RegexParser extends antlr4.Parser {
 	    let localctx = new RangeContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 12, RegexParser.RULE_range);
 	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 50;
-	        this.match(RegexParser.CHAR);
-	        this.state = 51;
-	        this.match(RegexParser.T__6);
-	        this.state = 52;
-	        this.match(RegexParser.CHAR);
+	        this.state = 54;
+	        this._errHandler.sync(this);
+	        var la_ = this._interp.adaptivePredict(this._input,6,this._ctx);
+	        switch(la_) {
+	        case 1:
+	            this.enterOuterAlt(localctx, 1);
+	            this.state = 50;
+	            this.match(RegexParser.CHAR);
+	            this.state = 51;
+	            this.match(RegexParser.T__6);
+	            this.state = 52;
+	            this.match(RegexParser.CHAR);
+	            break;
+
+	        case 2:
+	            this.enterOuterAlt(localctx, 2);
+	            this.state = 53;
+	            this.match(RegexParser.CHAR);
+	            break;
+
+	        }
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -298,47 +313,47 @@ export default class RegexParser extends antlr4.Parser {
 	    this.enterRule(localctx, 14, RegexParser.RULE_quantifier);
 	    var _la = 0;
 	    try {
-	        this.state = 66;
+	        this.state = 68;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 8:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 54;
+	            this.state = 56;
 	            this.match(RegexParser.T__7);
 	            break;
 	        case 9:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 55;
+	            this.state = 57;
 	            this.match(RegexParser.T__8);
 	            break;
 	        case 10:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 56;
+	            this.state = 58;
 	            this.match(RegexParser.T__9);
 	            break;
 	        case 11:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 57;
+	            this.state = 59;
 	            this.match(RegexParser.T__10);
-	            this.state = 58;
+	            this.state = 60;
 	            this.match(RegexParser.NUMBER);
-	            this.state = 63;
+	            this.state = 65;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            if(_la===12) {
-	                this.state = 59;
-	                this.match(RegexParser.T__11);
 	                this.state = 61;
+	                this.match(RegexParser.T__11);
+	                this.state = 63;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	                if(_la===15) {
-	                    this.state = 60;
+	                    this.state = 62;
 	                    this.match(RegexParser.NUMBER);
 	                }
 
 	            }
 
-	            this.state = 65;
+	            this.state = 67;
 	            this.match(RegexParser.T__12);
 	            break;
 	        default:

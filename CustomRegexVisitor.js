@@ -3,10 +3,10 @@ import RegexVisitor from './generated/RegexVisitor.js';
 class CustomVisitor extends RegexVisitor {
   // Recorrido para validación (puedes expandir según tus necesidades)
   visitRegex(ctx) {
-    if (ctx.term() && ctx.regex()) {
+    if (ctx.term && ctx.term() && ctx.regex && ctx.regex()) {
       this.visit(ctx.term());
       this.visit(ctx.regex());
-    } else if (ctx.term()) {
+    } else if (ctx.term && ctx.term()) {
       this.visit(ctx.term());
     }
     return true;
@@ -18,7 +18,7 @@ class CustomVisitor extends RegexVisitor {
 
   visitFactor(ctx) {
     this.visit(ctx.base());
-    if (ctx.quantifier) this.visit(ctx.quantifier());
+    if (ctx.quantifier && ctx.quantifier()) this.visit(ctx.quantifier());
     return true;
   }
 
@@ -39,7 +39,7 @@ class CustomVisitor extends RegexVisitor {
 
   visitRegexToJS(ctx) {
     let str = this.visitTermToJS(ctx.term());
-    if (ctx.regex()) {
+    if (ctx.regex && ctx.regex()) {
       str += '|' + this.visitRegexToJS(ctx.regex());
     }
     return str;
@@ -56,9 +56,9 @@ class CustomVisitor extends RegexVisitor {
   }
 
   visitBaseToJS(ctx) {
-    if (ctx.CHAR) return ctx.CHAR().getText();
-    if (ctx.group) return '(' + this.visitGroupToJS(ctx.group()) + ')';
-    if (ctx.characterClass) return this.visitCharacterClassToJS(ctx.characterClass());
+    if (ctx.CHAR && ctx.CHAR()) return ctx.CHAR().getText();
+    if (ctx.group && ctx.group()) return '(' + this.visitGroupToJS(ctx.group()) + ')';
+    if (ctx.characterClass && ctx.characterClass()) return this.visitCharacterClassToJS(ctx.characterClass());
     return '';
   }
 
