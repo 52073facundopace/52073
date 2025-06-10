@@ -28,17 +28,17 @@ async function main() {
   tokenStream.fill();
   console.log("📌 Tabla de lexemas-tokens:");
   const symbolicNames = RegexLexer.symbolicNames || [];
-const literalNames = RegexLexer.literalNames || [];
+  const literalNames = RegexLexer.literalNames || [];
 
-tokenStream.tokens.forEach(token => {
-  const tokenName =
-    symbolicNames[token.type] ||
-    literalNames[token.type] ||
-    token.type;
-  if (tokenName !== "WS" && token.text !== null) {
-    console.log(→ Token: '${token.text}'\tTipo: ${tokenName});
-  }
-});
+  tokenStream.tokens.forEach(token => {
+    const tokenName =
+      symbolicNames[token.type] ||
+      literalNames[token.type] ||
+      token.type;
+    if (tokenName !== "WS" && token.text !== null) {
+      console.log(`→ Token: '${token.text}'\tTipo: ${tokenName}`);
+    }
+  });
 
   // === ANÁLISIS SINTÁCTICO ===
   const parser = new RegexParser(tokenStream);
@@ -48,7 +48,7 @@ tokenStream.tokens.forEach(token => {
   parser.removeErrorListeners();
   parser.addErrorListener({
     syntaxError(recognizer, offendingSymbol, line, column, msg) {
-      console.error(❌ Error de sintaxis en línea ${line}, columna ${column}: ${msg});
+      console.error(`❌ Error de sintaxis en línea ${line}, columna ${column}: ${msg}`);
     }
   });
 
@@ -74,7 +74,7 @@ tokenStream.tokens.forEach(token => {
 
   // === TRADUCCIÓN A JAVASCRIPT Y EJECUCIÓN ===
   const regexJS = visitor.toJSRegex(tree);
-  console.log(\n📝 Expresión regular traducida a JavaScript: /${regexJS}/);
+  console.log(`\n📝 Expresión regular traducida a JavaScript: /${regexJS}/`);
 
   // Prueba la expresión regular con un string de ejemplo usando readline
   const rl = readline.createInterface({
